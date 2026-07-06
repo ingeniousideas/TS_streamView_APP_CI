@@ -27,9 +27,9 @@ jobs:
         run: |
           # Use podman-compose to spin up the containers in the runner workspace
           podman compose up -d
-          sleep 5
+          sleep 10
           # Verify the application architecture responds through the proxy
-          curl --fail http://localhost:80 || exit 1
+          curl --fail http://localhost:8020 || exit 1
           podman compose down
 
       - name: Tag & Push Images to Registry
