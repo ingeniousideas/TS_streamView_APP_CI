@@ -19,8 +19,6 @@ services:
       - ts-ui-server
 
   ts-ui-server:
-    env_file:
-    - .env
     image: devpatterns/ts-ui-server:${ENVIRONMENT:-dev}
     container_name: ts-ui-server
     build:
