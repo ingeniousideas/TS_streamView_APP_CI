@@ -26,11 +26,11 @@ jobs:
       - name: Integration Smoke Test
         run: |
           # Use podman-compose to spin up the containers in the runner workspace
-          podman compose up -d
+          podman compose --profile testing up -d
           sleep 10
           # Verify the application architecture responds through the proxy
           curl --fail http://localhost:8020 || exit 1
-          podman compose down
+          podman compose --profile testing down
 
       - name: Tag & Push Images to Registry
         run: |
