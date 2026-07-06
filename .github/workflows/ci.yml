@@ -25,12 +25,27 @@ jobs:
 
       - name: Integration Smoke Test
         run: |
-          # Use podman-compose to spin up the containers in the runner workspace
+          # 1. Start and enable the Podman API socket service for the runner user
+          systemctl --user start podman.socket
+          
+          # 2. Inform the compose plugin exactly where to find the active Podman socket
+          export DOCKER_HOST="unix://$XDG_RUNTIME_DIR/podman/podman.sock"
+
+          # 3. Spin up the testing profile containers injecting your built image configurations
           podman compose --profile testing up -d
+          
+          # Give containers time to initialize
           sleep 10
-          # Verify the application architecture responds through the proxy
+          
+          # 4. Verify the application architecture responds through the proxy
           curl --fail http://localhost:8020 || exit 1
+          
+          # Clean up
           podman compose --profile testing down
+        env:
+          # Ensure your compose file uses the fresh images built by this pipeline commit
+          # rather than pulling old configurations from the public registry.
+          ENVIRONMENT: ${{ github.sha }}
 
       - name: Tag & Push Images to Registry
         run: |
