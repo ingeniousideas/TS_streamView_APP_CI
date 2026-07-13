@@ -1,32 +1,15 @@
 # execute with
   # docker compose --profile dev up --build
 services:
-
-  ts-ui-proxy:
-    image: devpatterns/ts-ui-proxy:${ENVIRONMENT:-dev}
-    container_name: ts-ui-proxy
-    build: ./nginx
-    expose:
-      - "80"
-    ports:
-      - "8020:80"
-    profiles:
-      - development
-      - testing
-      - production
-    networks:
-      - ts-ui-proxy
-      - ts-ui-server
-
   ts-ui-server:
-    image: devpatterns/ts-ui-server:${ENVIRONMENT:-dev}
+    image: docker.io/${DOCKERHUB_USERNAME:-devpatterns}/stream_view:${ENVIRONMENT:-dev}
     container_name: ts-ui-server
     build:
       context: ./stream_view
       args:
         BUILD_ENV: ${BUILD_ENV:-development}
     ports:
-      - ":8050"
+      - "8050:8050" # Explicitly bound to the host so the CI runner can curl localhost:8050
     profiles:
       - development
       - testing
@@ -35,11 +18,6 @@ services:
     - ts-ui-server
 
 networks:
-  # For exposed API network.
-  ts-ui-proxy:
-    name: ts-ui-proxy
-    driver: bridge
-    external: false
   ts-ui-server:
     name: ts-ui-server
     driver: bridge

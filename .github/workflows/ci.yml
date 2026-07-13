@@ -18,10 +18,9 @@ jobs:
         run: |
           echo "${{ secrets.DOCKERHUB_TOKEN }}" | podman login docker.io -u "${{ secrets.DOCKERHUB_USERNAME }}" --password-stdin
 
-      - name: Build App Images
+      - name: Build App Image
         run: |
           podman build -t docker.io/${{ secrets.DOCKERHUB_USERNAME }}/stream_view:${{ github.sha }} ./stream_view
-          podman build -t docker.io/${{ secrets.DOCKERHUB_USERNAME }}/nginx_proxy:${{ github.sha }} ./nginx
 
       - name: Integration Smoke Test
         run: |
@@ -38,7 +37,7 @@ jobs:
           sleep 10
           
           # 4. Verify the application architecture responds through the proxy
-          curl --fail http://localhost:8020 || exit 1
+          curl --fail http://localhost:8050 || exit 1
           
           # Clean up
           podman compose --profile testing down
@@ -51,10 +50,7 @@ jobs:
         run: |
           # Tag as latest alongside the specific commit SHA
           podman tag docker.io/${{ secrets.DOCKERHUB_USERNAME }}/stream_view:${{ github.sha }} docker.io/${{ secrets.DOCKERHUB_USERNAME }}/stream_view:latest
-          podman tag docker.io/${{ secrets.DOCKERHUB_USERNAME }}/nginx_proxy:${{ github.sha }} docker.io/${{ secrets.DOCKERHUB_USERNAME }}/nginx_proxy:latest
           
           # Push artifacts out to Docker Hub
           podman push docker.io/${{ secrets.DOCKERHUB_USERNAME }}/stream_view:${{ github.sha }}
           podman push docker.io/${{ secrets.DOCKERHUB_USERNAME }}/stream_view:latest
-          podman push docker.io/${{ secrets.DOCKERHUB_USERNAME }}/nginx_proxy:${{ github.sha }}
-          podman push docker.io/${{ secrets.DOCKERHUB_USERNAME }}/nginx_proxy:latest
