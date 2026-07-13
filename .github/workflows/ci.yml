@@ -54,3 +54,29 @@ jobs:
           # Push artifacts out to Docker Hub
           podman push docker.io/${{ secrets.DOCKERHUB_USERNAME }}/stream_view:${{ github.sha }}
           podman push docker.io/${{ secrets.DOCKERHUB_USERNAME }}/stream_view:latest
+
+          # --- CD HANDOFF PHASE ---
+      
+      - name: Checkout Infra Repository
+        uses: actions/checkout@v4
+        with:
+          repository: ingeniousideas/TS_streamView_INFRA_CD
+          token: ${{ secrets.INFRA_REPO_PAT }}
+          path: infra-repo # Checks the repo out into a sub-folder to avoid mixing with app code
+
+      - name: Update Kubernetes Manifest
+        run: |
+          cd infra-repo
+          
+          # Use sed to find the image line in your deployment manifest and replace the tag.
+          # Note: Update the filepath 'ts-ui-server-deployment.yaml' if you placed it in a subfolder.
+          sed -i "s|image: docker.io/.*/stream_view:.*|image: docker.io/${{ secrets.DOCKERHUB_USERNAME }}/stream_view:${{ github.sha }}|g" ts-ui-server-deployment.yaml
+          
+          # Configure Git to commit as a bot
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          
+          # Commit and push the updated manifest
+          git add ts-ui-server-deployment.yaml
+          git commit -m "Automated CD Handoff: Update image tag to ${{ github.sha }}"
+          git push
