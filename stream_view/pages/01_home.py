@@ -38,7 +38,7 @@ layout = html.Div(
                     className="purpose",
                     style={"padding": "10px", "border": "1px solid #ccc", "borderRadius": "5px"},
                     children=[
-                        html.P('Automate allocation of regular investment.'),
+                        html.P('Automate allocation of regular investment and provide visibility of portfolio performance.'),
                     ]
                 ),
 
