@@ -182,3 +182,49 @@ html {
 #ticker_selection .Select-arrow-zone {
     color: #000000; /* Black arrow */
 }
+
+/* Page layout classes moved from inline styles in pages/01_home.py */
+.page-center-col {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 20px;
+}
+
+.content-wrap {
+    max-width: 900px;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+/* Board heading spacing that was previously applied inline */
+.board-heading {
+    margin-top: 20px;
+    margin-bottom: 10px;
+    width: 100%;
+}
+
+/* H2 used as section titles */
+.board-title {
+    margin: 0;
+}
+
+/* Container for bordered content blocks */
+.info-board {
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    background-color: transparent;
+}
+
+/* Body text within info boards */
+.board-body p {
+    margin: 0;
+}
+
+/* Method list moved from inline style */
+.method-list {
+    list-style-type: disc;
+    padding-left: 20px;
+    margin: 0;
+}

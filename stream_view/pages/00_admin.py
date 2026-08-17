@@ -42,8 +42,7 @@ layout = html.Div(
                     ]
                 ),
                 html.Div(
-                    className="purpose",
-                    style={"padding": "10px", "border": "1px solid #ccc", "borderRadius": "5px"},
+                    className="info-board board-body",
                     children=[
                         html.P('Admin page for TradeStream, providing an overview of the application and its functionalities.'),
                     ]

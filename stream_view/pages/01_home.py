@@ -10,10 +10,11 @@ methods = [
 ]
 
 layout = html.Div(
-    
-    style={"display": "flex", "flexDirection": "column", "alignItems": "center", "padding": "20px"},  # Center the content
-    
+    className="page-center-col",
     children=[
+        html.Div(
+            className="content-wrap",
+            children=[
     
         html.Div(
     
@@ -25,67 +26,51 @@ layout = html.Div(
 
                 # purpose
                 html.Div(
-                    className="pur_name",
-                    style={
-                        "marginTop": "20px",
-                        "marginBottom": "10px"
-                    },
-                    children=[
-                        html.H2('Purpose'),
-                    ]
-                ),
-                html.Div(
-                    className="purpose",
-                    style={"padding": "10px", "border": "1px solid #ccc", "borderRadius": "5px"},
-                    children=[
-                        html.P('Automate allocation of regular investment and provide visibility of portfolio performance. Also make this deployed with GitHub Actions and ArgoCD'),
-                    ]
-                ),
+                        className="board-heading",
+                        children=[
+                            html.H2('Purpose', className='board-title'),
+                        ]
+                    ),
+                    html.Div(
+                        className="info-board board-body",
+                        children=[
+                            html.P('Automate allocation of regular investment and provide visibility of portfolio performance. Also make this deployed with GitHub Actions and ArgoCD'),
+                        ]
+                    ),
 
                 # aim
                 html.Div(
-                    className="aim_name",
-                    style={
-                        "marginTop": "20px",
-                        "marginBottom": "10px"
-                    },
-                    children=[
-                        html.H2('Aim'),
-                    ]
-                ),
-                html.Div(
-                    className="aim",
-                    style={"padding": "10px", "border": "1px solid #ccc", "borderRadius": "5px"},
+                        className="board-heading",
+                        children=[
+                            html.H2('Aim', className='board-title'),
+                        ]
+                    ),
+                    html.Div(
+                        className="info-board board-body",
+                        children=[
+                            html.P('Develop weighting algorithms to apportion allocation of funds based on:'),
+                            html.Ul(
+                                id='method-list',
+                                className='method-list',
+                                children=[html.Li(i) for i in methods]
+                            ),
+                        ]
+                    ),
 
-                    children=[
-                        html.P('Develop weighting algorithms to apportion allocation of funds based on:'),
-                        html.Ul(
-                            id='method-list',
-                            style={"listStyleType": "disc", "paddingLeft": "20px"},  # Styling for the list
-                            children=[html.Li(i) for i in methods]
-                        ),
-                    ]
-                ),
-
+                # objective
                 html.Div(
-                    className="obj_name",
-                    style={
-                        "marginTop": "20px",
-                        "marginBottom": "10px"
-                    },
-                    children=[
-                        html.H2('Objective'),
-                    ]
-                ),
-                html.Div(
-
-                    className="objective",
-                    style={"padding": "10px", "border": "1px solid #ccc", "borderRadius": "5px"},
-                    children=[
-                        html.P('Create an income stream through strategic profit taking whilst still growing a balanced portfolio.'),
-                    ]
-                ),
+                        className="board-heading",
+                        children=[
+                            html.H2('Objective', className='board-title'),
+                        ]
+                    ),
+                    html.Div(
+                        className="info-board board-body",
+                        children=[
+                            html.P('Create an income stream through strategic profit taking whilst still growing a balanced portfolio.'),
+                        ]
+                    ),
             ]
         ),
     ]
-)
+)])
