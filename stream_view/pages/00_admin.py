@@ -45,7 +45,7 @@ layout = html.Div(
                     className="purpose",
                     style={"padding": "10px", "border": "1px solid #ccc", "borderRadius": "5px"},
                     children=[
-                        html.P('Automate allocation of regular investment and provide visibility of portfolio performance. Also make this deployed with GitHub Actions and ArgoCD'),
+                        html.P('Admin page for TradeStream, providing an overview of the application and its functionalities.'),
                     ]
                 ),
 
