@@ -1,20 +1,7 @@
 import dash
-from dash import html, dcc, callback, Input, Output
-import plotly.express as px
-
-"""
-TODO: get_data_gapminder() is called on every page load and every graph update,
-		fine for development,
-		add caching,
-			(e.g. functools.lru_cache or Dash's diskcache)
-		for production.
-"""
-# app data module
-from data.data_API_212_pies import get_data_pies, get_data_gapminder
-import layouts.pies_table as pies_table
+from dash import html
 
 dash.register_page(__name__, path="/", name="Admin", order=0)
-
 
 layout = html.Div(
     
@@ -44,7 +31,8 @@ layout = html.Div(
                 html.Div(
                     className="info-board board-body",
                     children=[
-                        html.P('Admin page for TradeStream, providing an overview of the application and its functionalities.'),
+                        html.P('Admin page for TradeStream.'),
+                        html.P('Highlights the responsibilities and processes for Admin users.'),
                     ]
                 ),
 
