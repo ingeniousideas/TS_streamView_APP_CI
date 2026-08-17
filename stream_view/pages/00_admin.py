@@ -26,6 +26,9 @@ def layout():
 				# Page header
 				html.H1(children='TradeStream-SteamView', style={'textAlign':'center'}),
 
+				# Title for line graph
+				html.H2(children='Gapminder Population Data',style={'textAlign':'center'}),
+
 				# drop down menu
 				html.Div([
 					dcc.Dropdown(df_gap.country.unique(), 'Canada', id='dropdown-selection'),
