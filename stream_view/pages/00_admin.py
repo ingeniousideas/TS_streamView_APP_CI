@@ -32,7 +32,7 @@ layout = html.Div(
 
                 # admin overview
                 html.Div(
-                    className="admin_view",
+                    className="board-heading",
                     style={
                         "marginTop": "20px",
                         "marginBottom": "10px"
@@ -48,6 +48,27 @@ layout = html.Div(
                     ]
                 ),
 
+                # activities
+                html.Div(
+                    className="board-heading",
+                    style={
+                        "marginTop": "20px",
+                        "marginBottom": "10px"
+                    },
+                    children=[
+                        html.H2('Activities'),
+                    ]
+                ),
+                html.Div(
+                    className="info-board board-body",
+                    children=[
+						html.P('Administer the application and manage user accounts.'),
+                    	html.P('Monitor system performance and logs.'),
+						html.P('Configure application settings and preferences.'),	
+                    ]
+
+                ),
+                
             ]
         ),
     ]
