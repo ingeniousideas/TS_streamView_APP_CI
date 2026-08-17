@@ -23,19 +23,22 @@ layout = html.Div([
 			# Page header
 			html.H1(children='TradeStream Individual Asset Time Series Charts', style={'textAlign':'center'}),
 
-			# yfinance graph components
+			# yfinance aero graph components
 			html.Div([
 
 				# Line graph section
 				html.Div([
 				
 					# Header title
-					html.H2("Asset Selection"),
+					html.H2("Aerospace Giants"),
 
 					# Option dropdown
 					dcc.Dropdown(
-						id='ticker_selection',
+						id='aero_selection',
 						options=[
+							{'label': 'Rolls-Royce (RR)', 'value': 'RR.L'},
+							{'label': 'Airbus (AIR)', 'value': 'AIR.PA'},
+							{'label': 'BAE Systems (BA)', 'value': 'BA.L'},
 							{'label': 'Tesla (TSLA)', 'value': 'TSLA'},
 							{'label': 'IBM (IBM)', 'value': 'IBM'},
 							{'label': 'Microsoft (MSFT)', 'value': 'MSFT'},
@@ -45,7 +48,7 @@ layout = html.Div([
 							{'label': 'TCS (TCS.NS)', 'value': 'TCS.NS'},
 							{'label': 'Sony (SONY)', 'value': 'SONY'},
 							],
-						value='TSLA',  # Default ticker
+						value='RR.L',  # Default ticker
 						placeholder="Select a stock ticker"
 					),
 				]),
@@ -55,7 +58,7 @@ layout = html.Div([
 				
 					html.H2(id='', className='', children='Asset Price Chart'),
 					# Graph
-					dcc.Graph(id='stock_graph'
+					dcc.Graph(id='aero_graph'
 					),
 
 				], className='graph-container'),
@@ -175,8 +178,8 @@ def build_graph(df, symbol):
 
 # Callback for updating the graph
 @callback(
-	Output('stock_graph', 'figure'),
-	Input('ticker_selection', 'value'),
+	Output('aero_graph', 'figure'),
+	Input('aero_selection', 'value'),
 )
 def update_output(selected_dropdown_value):
 
