@@ -16,43 +16,40 @@ import layouts.pies_table as pies_table
 dash.register_page(__name__, path="/", name="Admin", order=0)
 
 
-def layout():
-	df_gap = get_data_gapminder()
-	pies_data = get_data_pies()
+layout = html.Div(
+    
+    style={"display": "flex", "flexDirection": "column", "alignItems": "center", "padding": "20px"},  # Center the content
+    
+    children=[
+    
+        html.Div(
+    
+            style={"maxWidth": "900px", "width": "100%", "boxSizing": "border-box"},  # Limit the width of content
+    
+            children=[
+    
+                html.H1('TradeStream', style={"textAlign": "center"}),  # Center-align header
 
-	return html.Div([
-			html.Div([
-				
-				# Page header
-				html.H1(children='TradeStream-SteamView', style={'textAlign':'center'}),
+                # admin overview
+                html.Div(
+                    className="admin_view",
+                    style={
+                        "marginTop": "20px",
+                        "marginBottom": "10px"
+                    },
+                    children=[
+                        html.H2('Overview'),
+                    ]
+                ),
+                html.Div(
+                    className="purpose",
+                    style={"padding": "10px", "border": "1px solid #ccc", "borderRadius": "5px"},
+                    children=[
+                        html.P('Automate allocation of regular investment and provide visibility of portfolio performance. Also make this deployed with GitHub Actions and ArgoCD'),
+                    ]
+                ),
 
-				# Title for line graph
-				html.H2(children='Gapminder Population Data',style={'textAlign':'center'}),
-
-				# drop down menu
-				html.Div([
-					dcc.Dropdown(df_gap.country.unique(), 'Canada', id='dropdown-selection'),
-				]),
-
-				# line graph
-				html.Div([
-					dcc.Graph(id='graph-content'),
-				], className='graph-container'),
-
-				# pies data table
-				html.Div([
-					pies_table.create_table(pies_data),
-				]),
-	
-			])
-		],className='main-content')
-
-# callbacks are what bind the components inputs and outputs together. These are decorators on the following funciont (def).
-@callback(
-	Output('graph-content', 'figure'),
-	Input('dropdown-selection', 'value')
+            ]
+        ),
+    ]
 )
-def update_graph(value):
-	df_gap = get_data_gapminder()
-	dff = df_gap[df_gap.country==value]
-	return px.line(dff, x='year', y='pop')
