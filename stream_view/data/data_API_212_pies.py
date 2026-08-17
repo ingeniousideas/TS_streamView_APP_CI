@@ -18,7 +18,7 @@ def get_data_pies():
         # If it's a list, use it as-is
         data = data_input
     else:
-        raise ValueError("Input data must be a JSON string or a list")
+        raise TypeError("Input data must be a JSON string or a list")
 
     return data
 
