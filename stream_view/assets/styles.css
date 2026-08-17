@@ -149,3 +149,36 @@ html {
 #dropdown-selection .Select-arrow-zone {
     color: #e2e2e2;
 }
+
+/* Specific override for the ticker dropdown to ensure readable text on light menus */
+#ticker_selection .Select-control {
+    background-color: #ffffff; /* White background for the control */
+    color: #000000; /* Black text for selected value */
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+#ticker_selection .Select-menu-outer {
+    background-color: #ffffff; /* White background for the options menu */
+    color: #000000; /* Black text for options */
+    border-radius: 5px;
+    border: 1px solid #ccc;
+}
+
+#ticker_selection .Select-option {
+    color: #000000; /* Ensure options are black */
+    padding: 10px;
+    cursor: pointer;
+}
+
+#ticker_selection .Select-option:hover {
+    background-color: #f0f0f0;
+}
+
+#ticker_selection .Select-value-label {
+    color: #000000; /* Black text for the selected label */
+}
+
+#ticker_selection .Select-arrow-zone {
+    color: #000000; /* Black arrow */
+}
