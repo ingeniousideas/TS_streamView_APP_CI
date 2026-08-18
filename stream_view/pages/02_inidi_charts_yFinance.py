@@ -87,10 +87,11 @@ def fetch_stock_data(symbol):
         raise ValueError(f"No data returned for {symbol}")
 
     # Get timezone from the data itself if possible, otherwise fall back to fast_info
-    try:
-        timezone = hist['Date'].dt.tz.zone if hist['Date'].dt.tz else stock.fast_info.get('timezone')
-    except Exception:
-        timezone = 'UTC'
+    if 'Date' in hist.columns and pd.api.types.is_datetime64_any_dtype(hist['Date']):
+        tz_info = hist['Date'].dt.tz
+        timezone = tz_info.zone if tz_info is not None else stock.fast_info.get('timezone', 'UTC')
+    else:
+        timezone = stock.fast_info.get('timezone', 'UTC')
 
     return hist, timezone
 
@@ -141,13 +142,13 @@ def build_graph(df, symbol):
 	# Add stock price line
 	fig.add_scatter(x=df['Date'], y=df['Close'],
 				 	mode='lines', name='Stock Price',
-				 	line=dict(color='white', width=1)
+				 	line={"color": 'white', "width": 1}
 				 	)
 
 	# Add 52-week moving average line
 	fig.add_scatter(x=df['Date'], y=df['52_Week_MA'],
 				 	mode='lines', name='52-Week MA',
-				 	line=dict(dash='dash', color='blue', width=1)
+				 	line={"dash": 'dash', "color": 'blue', "width": 1}
 				 	)
 
 	# Add selected percentage bands
@@ -158,12 +159,12 @@ def build_graph(df, symbol):
 
 		fig.add_scatter(x=df['Date'], y=df[f'52_Week_MA +{int(band*100)}%'],
 				  		mode='lines', name=f'{int(band*100)}%',
-						line=dict(dash='dot', color='green', width=line_width)
+						line={"dash": 'dot', "color": 'green', "width": line_width}
 						)
 
 		fig.add_scatter(x=df['Date'], y=df[f'52_Week_MA -{int(band*100)}%'],
 		  				mode='lines', name=f'-{int(band*100)}%',
-						line=dict(dash='dot', color='red', width=line_width)
+						line={"dash": 'dot', "color": 'red', "width": line_width}
 						)
 
 

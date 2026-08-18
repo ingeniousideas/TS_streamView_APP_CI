@@ -1,0 +1,12 @@
+contexts/
+.directory
+*venv*
+TODO
+*.pyc
+*.vs
+*.vscode
+*.pytest*
+*modules/__pycache__
+.env
+0_poc_code
+venv_TradeStream*
