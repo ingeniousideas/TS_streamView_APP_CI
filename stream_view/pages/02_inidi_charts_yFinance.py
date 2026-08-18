@@ -1,18 +1,9 @@
 import dash
-from dash import html, dcc, callback, Input, Output
-import plotly.express as px
-import yfinance as yf
 import pandas as pd
+import plotly.express as px
 import pytz
-
-from data.data_API_alphaVantage import extract_data, create_stock_price_figure
-
-# app layouts module
-import layouts.alpha_table as alpha_table
-
-# data api import
-from data.data_API_alphaVantage import alpha_get_ibm
-
+import yfinance as yf
+from dash import Input, Output, callback, dcc, html
 
 dash.register_page(__name__, path="/charts_indi_yfinance", name="Charts - Individual (yFinance)", order=2)
 
