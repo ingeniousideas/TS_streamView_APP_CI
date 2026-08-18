@@ -183,6 +183,39 @@ html {
     color: #000000; /* Black arrow */
 }
 
+/* Specific override for the ticker dropdown to ensure readable text on light menus */
+#tech_selection .Select-control {
+    background-color: #ffffff; /* White background for the control */
+    color: #000000; /* Black text for selected value */
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+#tech_selection .Select-menu-outer {
+    background-color: #ffffff; /* White background for the options menu */
+    color: #000000; /* Black text for options */
+    border-radius: 5px;
+    border: 1px solid #ccc;
+}
+
+#tech_selection .Select-option {
+    color: #000000; /* Ensure options are black */
+    padding: 10px;
+    cursor: pointer;
+}
+
+#tech_selection .Select-option:hover {
+    background-color: #f0f0f0;
+}
+
+#tech_selection .Select-value-label {
+    color: #000000; /* Black text for the selected label */
+}
+
+#tech_selection .Select-arrow-zone {
+    color: #000000; /* Black arrow */
+}
+
 /* Page layout classes moved from inline styles in pages/01_home.py */
 .page-center-col {
     display: flex;
