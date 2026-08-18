@@ -30,14 +30,33 @@ layout = html.Div([
 							{'label': 'Rolls-Royce (RR)', 'value': 'RR.L'},
 							{'label': 'Airbus (AIR)', 'value': 'AIR.PA'},
 							{'label': 'BAE Systems (BA)', 'value': 'BA.L'},
-							{'label': 'Tesla (TSLA)', 'value': 'TSLA'},
+							],
+						value='RR.L',  # Default ticker
+						placeholder="Select a stock ticker"
+					),
+				]),
+
+				# Graph
+				html.Div([
+				
+					html.H2(id='', className='', children='Asset Price Chart'),
+					# Graph
+					dcc.Graph(id='tech_graph'
+					),
+
+				], className='graph-container'),
+
+					# Header title
+					html.H2("Tech Giants"),
+
+					# Option dropdown
+					dcc.Dropdown(
+						id='aero_selection',
+						options=[
+							{'label': 'Amazon (AMZN)', 'value': 'AMZN'},
+							{'label': 'Google (GOOG)', 'value': 'GOOG'},
 							{'label': 'IBM (IBM)', 'value': 'IBM'},
 							{'label': 'Microsoft (MSFT)', 'value': 'MSFT'},
-							{'label': 'NVIDIA (NVDA)', 'value': 'NVDA'},
-							{'label': 'BP (BP.L)', 'value': 'BP.L'},
-							{'label': 'Vodafone (VOD.L)', 'value': 'VOD.L'},
-							{'label': 'TCS (TCS.NS)', 'value': 'TCS.NS'},
-							{'label': 'Sony (SONY)', 'value': 'SONY'},
 							],
 						value='RR.L',  # Default ticker
 						placeholder="Select a stock ticker"
@@ -54,12 +73,12 @@ layout = html.Div([
 
 				], className='graph-container'),
 
-				# control buttons
-				html.Div([
-					html.H2(id='', className='', children='Asset Graph Control Buttons'),
-					# Update button
-					html.Button('Update Graph', id='update-button'),
-				]),
+				# # control buttons
+				# html.Div([
+				# 	html.H2(id='', className='', children='Asset Graph Control Buttons'),
+				# 	# Update button
+				# 	html.Button('Update Graph', id='update-button'),
+				# ]),
 
 			]),
 
@@ -173,7 +192,24 @@ def build_graph(df, symbol):
 	Output('aero_graph', 'figure'),
 	Input('aero_selection', 'value'),
 )
-def update_output(selected_dropdown_value):
+def update_aero(selected_dropdown_value):
+
+	# Fetch and preprocess stock data
+	df_stock_timeseries = preprocess_stock_data(selected_dropdown_value)
+	if df_stock_timeseries.empty:
+		return {}
+
+	# Build the graph
+	fig = build_graph(df_stock_timeseries, selected_dropdown_value)
+
+	return fig
+
+# Callback for updating the graph
+@callback(
+	Output('tech_graph', 'figure'),
+	Input('tech_selection', 'value'),
+)
+def update_tech(selected_dropdown_value):
 
 	# Fetch and preprocess stock data
 	df_stock_timeseries = preprocess_stock_data(selected_dropdown_value)
