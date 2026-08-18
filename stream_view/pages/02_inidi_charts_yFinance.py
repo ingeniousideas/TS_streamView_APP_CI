@@ -48,7 +48,7 @@ layout = html.Div([
 					dcc.Graph(id='aero_graph'
 					),
 
-				# ], className='graph-container'),
+				], className='graph-container'),
 
 				# # Line graph section
 				# html.Div([
