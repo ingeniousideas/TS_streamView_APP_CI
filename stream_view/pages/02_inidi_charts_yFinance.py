@@ -30,10 +30,6 @@ layout = html.Div([
 							{'label': 'Rolls-Royce (RR)', 'value': 'RR.L'},
 							{'label': 'Airbus (AIR)', 'value': 'AIR.PA'},
 							{'label': 'BAE Systems (BA)', 'value': 'BA.L'},
-							{'label': 'Tesla (TSLA)', 'value': 'TSLA'},
-							{'label': 'IBM (IBM)', 'value': 'IBM'},
-							{'label': 'Microsoft (MSFT)', 'value': 'MSFT'},
-							{'label': 'NVIDIA (NVDA)', 'value': 'NVDA'},
 							],
 						value='RR.L',  # Default ticker
 						placeholder="Select a stock ticker"
