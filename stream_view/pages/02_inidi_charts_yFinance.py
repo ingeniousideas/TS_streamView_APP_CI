@@ -48,44 +48,37 @@ layout = html.Div([
 					dcc.Graph(id='aero_graph'
 					),
 
-				], className='graph-container'),
+				# ], className='graph-container'),
 
-				# Line graph section
-				html.Div([
-				
-					# Header title
-					html.H2("Tech Giants"),
-
-					# Option dropdown
-					dcc.Dropdown(
-						id='tech_selection',
-						options=[
-							{'label': 'Amazon (AMZN)', 'value': 'AMZN'},
-							{'label': 'Google (GOOG)', 'value': 'GOOG'},
-							{'label': 'IBM (IBM)', 'value': 'IBM'},
-							{'label': 'Microsoft (MSFT)', 'value': 'MSFT'},
-							],
-						value='RR.L',  # Default ticker
-						placeholder="Select a stock ticker"
-					),
-				]),
-
-				# Graph
-				html.Div([
-				
-					html.H2(id='', className='', children='Asset Price Chart'),
-					# Graph
-					dcc.Graph(id='tech_graph'
-					),
-
-				], className='graph-container'),
-
-				# # control buttons
+				# # Line graph section
 				# html.Div([
-				# 	html.H2(id='', className='', children='Asset Graph Control Buttons'),
-				# 	# Update button
-				# 	html.Button('Update Graph', id='update-button'),
+				
+				# 	# Header title
+				# 	html.H2("Tech Giants"),
+
+				# 	# Option dropdown
+				# 	dcc.Dropdown(
+				# 		id='tech_selection',
+				# 		options=[
+				# 			{'label': 'Amazon (AMZN)', 'value': 'AMZN'},
+				# 			{'label': 'Google (GOOG)', 'value': 'GOOG'},
+				# 			{'label': 'IBM (IBM)', 'value': 'IBM'},
+				# 			{'label': 'Microsoft (MSFT)', 'value': 'MSFT'},
+				# 			],
+				# 		value='AMZN',  # Default ticker
+				# 		placeholder="Select a stock ticker"
+				# 	),
 				# ]),
+
+				# # Graph
+				# html.Div([
+				
+				# 	html.H2(id='', className='', children='Asset Price Chart'),
+				# 	# Graph
+				# 	dcc.Graph(id='tech_graph'
+				# 	),
+
+				# ], className='graph-container'),
 
 			]),
 
